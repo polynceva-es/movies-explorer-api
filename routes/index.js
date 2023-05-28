@@ -9,6 +9,7 @@ const moviesRouter = require('./movies');
 const NotFoundError = require('../errors/notFoundError');
 const errorHandler = require('../middlewares/errorHadler');
 const corsHandler = require('../middlewares/corsHandler');
+
 const {
   name,
   email,

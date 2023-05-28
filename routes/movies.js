@@ -3,7 +3,7 @@ const { Joi, celebrate } = require('celebrate');
 const {
   getMovies,
   createMovie,
-  deleteMovie
+  deleteMovie,
 } = require('../controllers/movies');
 const { joiIsUrlValid } = require('../utils/isUrlValid');
 
@@ -21,12 +21,12 @@ moviesRouter.post('/', celebrate({
     nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().custom(joiIsUrlValid),
     movieId: Joi.number().required(),
-      }),
+  }),
 }), createMovie);
 moviesRouter.delete('/:movieId', celebrate({
-    params: Joi.object().keys({
-      movieId: Joi.string().hex().length(24).required(),
-    }),
-  }), deleteMovie)
+  params: Joi.object().keys({
+    movieId: Joi.string().hex().length(24).required(),
+  }),
+}), deleteMovie);
 
 module.exports = moviesRouter;
