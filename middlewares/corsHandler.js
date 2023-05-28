@@ -1,7 +1,7 @@
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  // 'https://polyntseva.mesto.nomoredomains.monster',
-  // 'http://polyntseva.mesto.nomoredomains.monster',
+  'https://polyntseva.diplom.nomoredomains.rocks',
+  'http://polyntseva.diplom.nomoredomains.rocks',
   'http://localhost:3000'
 ];
 
