@@ -10,11 +10,11 @@ const { joiIsUrlValid } = require('../utils/isUrlValid');
 moviesRouter.get('/', getMovies);
 moviesRouter.post('/', celebrate({
   body: Joi.object().keys({
-    country: Joi.string().alphanum().required(),
-    director: Joi.string().alphanum().required(),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    description: Joi.string().alphanum().required(),
+    description: Joi.string().required(),
     image: Joi.string().required().custom(joiIsUrlValid),
     trailerLink: Joi.string().required().custom(joiIsUrlValid),
     nameRU: Joi.string().required(),

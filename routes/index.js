@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const appRouter = require('express').Router();
+const helmet = require('helmet');
+const limiter = require('../utils/limiterConfig');
 const { login, createUser, celebrateParams } = require('../controllers/users');
 const auth = require('../middlewares/auth');
 const { requestLogger, errorLogger } = require('../middlewares/logger');
@@ -16,7 +18,9 @@ const {
   password,
 } = celebrateParams;
 
+appRouter.use(helmet());
 appRouter.use(requestLogger); // подключаем логгер запросов
+appRouter.use(limiter);
 appRouter.use(corsHandler);
 appRouter.use(bodyParser.json());
 
@@ -32,7 +36,7 @@ appRouter.post('/signup', celebrate({
 }), createUser);
 appRouter.use('/users', auth, usersRouter);
 appRouter.use('/movies', auth, moviesRouter);
-appRouter.use('*', (req, res, next) => { next(new NotFoundError('Страница не найдена')); });
+appRouter.use('*', auth, (req, res, next) => { next(new NotFoundError('Страница не найдена')); });
 appRouter.use(errorLogger); // подключаем логгер ошибок
 appRouter.use(errors());
 appRouter.use(errorHandler);
